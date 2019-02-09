@@ -1,0 +1,21 @@
+{
+    "name": "Amazon Associates Widget",
+    "version": "0.0.1",
+    "author": [
+        "[https://multidimension.al/ multidimension.al]"
+    ],
+    "url": "https://github.com/multidimension-al/amazon-widget",
+    "descriptionmsg": "amazonwidget-desc",
+    "license-name": "MIT",
+    "type": "mediawiki-extension",
+    "config": {
+        "_prefix": "wgAmazonWidget"
+    },
+    "requires": {
+        "MediaWiki": ">= 1.27.0"
+    },
+    "MessagesDirs": {
+        "Amazonwidget": "i18n"
+    },
+    "manifest_version": 1
+}
