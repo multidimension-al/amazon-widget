@@ -5,7 +5,7 @@
 [![License](https://poser.pugx.org/multidimensional/amazon-widget/license.svg)](https://packagist.org/packages/multidimensional/amazon-widget)
 [![Total Downloads](https://poser.pugx.org/multidimensional/amazon-widget/d/total.svg)](https://packagist.org/packages/multidimensional/amazon-widget)
 
-A [MediaWiki](http://www.mediawiki.org/) Extension for adding Amazon Assoicate Widgets to your Wiki.
+A [MediaWiki](http://www.mediawiki.org/) Extension for adding Amazon Associate Widgets to your Wiki.
 
 ## Requirements
 
