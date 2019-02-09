@@ -45,7 +45,7 @@ class AmazonWidgetHooks
      */
     static function onParserFirstCallInit(Parser &$parser)
     {
-        $parser->setHook('AmazonWidget', 'AmazonWidget::render');
+        $parser->setHook('AmazonWidget', AmazonWidget::render);
         return true;
     }
 
