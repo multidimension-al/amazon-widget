@@ -15,14 +15,14 @@
         "MediaWiki": ">= 1.27.0"
     },
     "MessagesDirs": {
-        "Amazonwidget": "i18n"
+        "AmazonWidget": "i18n"
     },
     "AutoloadClasses": {
-		"Multidimensional\\AmazonWidget\\Hooks": "includes/Hooks.php",
-	},
-	"Hooks": {
-		"ParserFirstCallInit": "Multidimensional\\AmazonWidget\\Hooks::onParserFirstCallInit",
-		"BeforePageDisplay": "Multidimensional\\AmazonWidget\\Hooks::onBeforePageDisplay"
-	},
+        "Multidimensional\\AmazonWidget\\AmazonWidget": "AmazonWidget.php",
+    },
+    "Hooks": {
+         "ParserFirstCallInit": "Multidimensional\\AmazonWidget\\AmazonWidget::onParserFirstCallInit",
+         "BeforePageDisplay": "Multidimensional\\AmazonWidget\\AmazonWidget::onBeforePageDisplay"
+    },
     "manifest_version": 1
 }
