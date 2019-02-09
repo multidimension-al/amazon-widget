@@ -18,7 +18,7 @@ Download the extension and add it to your extensions folder, or install it by ad
 ```
 {
     "require": {
-        "multidimensional/amazonwidget": "*"
+        "multidimensional/amazon-widget": "*"
     }
 }
 ```
@@ -26,7 +26,7 @@ Download the extension and add it to your extensions folder, or install it by ad
 Activate the extension in ```LocalSettings.php``` and set your phpBB directory location.
 
 ```php
-wfLoadExtension( 'Amazonwidget' );
+wfLoadExtension( 'AmazonWidget' );
 ```
 
 That's it!
