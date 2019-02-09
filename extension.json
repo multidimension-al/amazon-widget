@@ -19,11 +19,11 @@
     },
     "AutoloadClasses": {
         "Multidimensional\\AmazonWidget\\AmazonWidget": "AmazonWidget.php",
-        "Multidimensional\\AmazonWidget\\Hooks": "AmazonWidgetHooks.php"
+        "Multidimensional\\AmazonWidget\\AmazonWidgetHooks": "AmazonWidgetHooks.php"
     },
     "Hooks": {
-         "ParserFirstCallInit": "Multidimensional\\AmazonWidget\\Hooks::onParserFirstCallInit",
-         "BeforePageDisplay": "Multidimensional\\AmazonWidget\\Hooks::onBeforePageDisplay"
+         "ParserFirstCallInit": "Multidimensional\\AmazonWidget\\AmazonWidgetHooks::onParserFirstCallInit",
+         "BeforePageDisplay": "Multidimensional\\AmazonWidget\\AmazonWidgetHooks::onBeforePageDisplay"
     },
     "manifest_version": 1
 }
