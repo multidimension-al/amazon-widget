@@ -17,5 +17,12 @@
     "MessagesDirs": {
         "Amazonwidget": "i18n"
     },
+    "AutoloadClasses": {
+		"Multidimensional\\AmazonWidget\\Hooks": "includes/Hooks.php",
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "Multidimensional\\AmazonWidget\\Hooks::onParserFirstCallInit",
+		"BeforePageDisplay": "Multidimensional\\AmazonWidget\\Hooks::onBeforePageDisplay"
+	},
     "manifest_version": 1
 }
