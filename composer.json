@@ -1,0 +1,26 @@
+{
+    "name": "multidimensional/amazon-widget",
+    "type": "mediawiki-extension",
+    "description": "A MediaWiki Extension for adding Amazon Assoicate Widgets to your Wiki.",
+    "version": "0.0.1",
+    "homepage": "https://github.com/multidimension-al/amazon-widget",
+    "license": "MIT",
+    "authors": [{
+        "name": "multidimension.al",
+        "homepage": "https://multidimension.al",
+        "role": "Developer"
+    }],
+    "require": {
+        "php": ">=5.4.0",
+        "composer/installers": "~1.0.1"
+    },
+    "require-dev": {
+        "mediawiki/mediawiki-codesniffer": "*"
+    },
+    "scripts": {
+        "test": [
+            "phpcs -p -s"
+        ],
+        "fix": "phpcbf"
+    }
+}
