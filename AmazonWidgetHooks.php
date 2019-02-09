@@ -21,6 +21,10 @@
 
 namespace Multidimensional\AmazonWidget;
 
+use OutputPage;
+use Parser;
+use Skin;
+
 class AmazonWidgetHooks
 {
 

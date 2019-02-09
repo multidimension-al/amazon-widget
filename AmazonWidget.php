@@ -22,6 +22,8 @@
 namespace Multidimensional\AmazonWidget;
 
 use MediaWiki\MediaWikiServices;
+use Parser;
+use PPFrame;
 
 class AmazonWidget {
 
