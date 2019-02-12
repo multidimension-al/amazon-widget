@@ -93,6 +93,10 @@ class AmazonWidget {
             $wgAmazonWidgetHeight = '240px';
         }
 
+        if (!empty($wgAmazonWidgetStyle) && substr(trim($wgAmazonWidgetStyle), -1, 1) !== ';') {
+            $wgAmazonWidgetStyle = trim($wgAmazonWidgetStyle) . ';';
+        }
+
         if (!preg_match('/width:([^;])+/i', $wgAmazonWidgetStyle)) {
             $wgAmazonWidgetStyle .= 'width:' . $wgAmazonWidgetWidth . ';';
         }
