@@ -27,7 +27,7 @@ Activate the extension in ```LocalSettings.php``` and set your Amazon tag.
 
 ```php
 wfLoadExtension( 'AmazonWidget' );
-$wgAmazonWidgetTag = '-YOUR-AMAZON-TAG-HERE-';
+$wgAmazonWidgetTag = 'YOUR-AMAZON-TAG-HERE-20';
 ```
 
 That's it!
