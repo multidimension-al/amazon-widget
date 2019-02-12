@@ -21,24 +21,10 @@
 
 namespace Multidimensional\AmazonWidget;
 
-use OutputPage;
 use Parser;
-use Skin;
-use Multidimensional\AmazonWidget\AmazonWidget;
 
 class AmazonWidgetHooks
 {
-
-    /**
-     * @param OutputPage $out
-     * @param Skin $skin
-     * @return bool
-     */
-    static function onBeforePageDisplay(OutputPage &$out, Skin &$skin)
-    {
-        $out->addModules('ext.AmazonWidget');
-        return true;
-    }
 
     /**
      * @param Parser $parser
@@ -46,7 +32,7 @@ class AmazonWidgetHooks
      */
     static function onParserFirstCallInit(Parser &$parser)
     {
-        $parser->setHook('AmazonWidget', AmazonWidget::render);
+        $parser->setHook('amazon', 'Multidimensional\AmazonWidget\AmazonWidget::render');
         return true;
     }
 
