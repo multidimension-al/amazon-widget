@@ -9,7 +9,7 @@ A [MediaWiki](http://www.mediawiki.org/) Extension for adding Amazon Associate W
 
 ## Requirements
 
-* Mediawiki 1.27+
+* Mediawiki 1.25+
 
 ## Installation
 
@@ -23,13 +23,63 @@ Download the extension and add it to your extensions folder, or install it by ad
 }
 ```
 
-Activate the extension in ```LocalSettings.php``` and set your phpBB directory location.
+Activate the extension in ```LocalSettings.php``` and set your Amazon tag.
 
 ```php
 wfLoadExtension( 'AmazonWidget' );
+$wgAmazonWidgetTag = '-YOUR-AMAZON-TAG-HERE-';
 ```
 
 That's it!
+
+## Usage in MediaWiki
+
+To use the Amazon tag, it is very easy. There are two elements that are required:
+
+* ASIN (product code)
+* Link ID (from your Amazon Associates link)
+
+Example:
+
+```$xslt
+<amazon asin="B07N7RXQF6"
+    id="5d90afe84e9cd34fb5a0f1fac6b9bf8d"/>
+```
+
+You can also add advanced tags:
+
+* Width (pixel count or percentage)
+* Height (pixel count or percentage)
+* Style (any css style information)
+
+Example:
+
+```$xslt
+<amazon asin="B07N7RXQF6"
+    id="5d90afe84e9cd34fb5a0f1fac6b9bf8d"
+    width="200"
+    height="150"
+    style="float:right;"/>
+```
+
+Additional configuration options can be hardcoded in your ```LocalSettings.php``` file.
+
+## Advanced Configuration
+
+Hard coded settings can also be added in your ```LocalSettings.php``` file. These will affect appearances across all Widgets, but note that your cache will need to be cleared for all changes to take effect.
+
+Here are the default values:
+
+```php
+$wgAmazonWidgetRegion = 'US';
+$wgAmazonWidgetWidth = 120;
+$wgAmazonWidgetHeight = 240;
+$wgAmazonWidgetNewWindow = false;
+$wgAmazonWidgetBorder = true;
+$wgAmazonWidgetBackground = 'ffffff';
+$wgAmazonWidgetTitleColor = '0066c0';
+$wgAmazonWidgetPriceColor = '333333';
+```
 
 ## License
 
