@@ -23,32 +23,6 @@ use MediaWiki\MediaWikiServices;
 
 class AmazonWidgetTest extends MediaWikiTestCase
 {
-
-    public function testRender()
-    {
-
-        global $wgAmazonWidgetTag, $wgAmazonWidgetRegion, $wgAmazonWidgetWidth, $wgAmazonWidgetHeight;
-        global $wgAmazonWidgetBackground, $wgAmazonWidgetBorder, $wgAmazonWidgetPriceColor;
-        global $wgAmazonWidgetTitleColor, $wgAmazonWidgetNewWindow, $wgAmazonWidgetMarketplace;
-
-        $parser = MediaWikiServices::getInstance()->getParserFactory()->create();
-        $parser->setHook('amazon', 'Multidimensional\AmazonWidget\AmazonWidget::render');
-
-        $parserOutput = $parser->parse(
-            "<amazon asin='B00005N5PF' id='123' />",
-            Title::newFromText('Test'),
-            $this->getParserOptions()
-        );
-
-        $this->assertContains('<iframe style="width:' . $wgAmazonWidgetWidth . ';height:' . $wgAmazonWidgetHeight . ';" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&amp;OneJS=1&amp;Operation=GetAdHtml&amp;MarketPlace=' . $wgAmazonWidgetRegion . '&amp;source=ac&amp;ref=tf_til&amp;ad_type=product_link&amp;tracking_id=' . $wgAmazonWidgetTag . '&amp;marketplace=' . $wgAmazonWidgetMarketplace . '&amp;region=' . $wgAmazonWidgetRegion . '&amp;placement=B00005N5PF&amp;asins=B00005N5PF&amp;id=123&amp;show_border=' . ($wgAmazonWidgetBorder ? 'true' : 'false') . '&amp;link_opens_in_new_window=' . ($wgAmazonWidgetNewWindow ? 'true' : 'false') . '&amp;price_color=' . $wgAmazonWidgetPriceColor . '&amp;title_color=' . $wgAmazonWidgetTitleColor . '&amp;bg_color=' . $wgAmazonWidgetBackground . '"></iframe>', $parserOutput->getText(['unwrap' => true]));
-        $parser->mPreprocessor = null; # Break the Parser <-> Preprocessor cycle
-    }
-
-    private function getParserOptions()
-    {
-        return ParserOptions::newFromUserAndLang(new User, MediaWikiServices::getInstance()->getContentLanguage());
-    }
-
     protected function setUp()
     {
         parent::setUp();
@@ -74,4 +48,37 @@ class AmazonWidgetTest extends MediaWikiTestCase
         parent::tearDown();
     }
 
+    public function RenderFixture($asin, $id, $style = '', $width = 120, $height = 240)
+    {
+        global $wgAmazonWidgetTag, $wgAmazonWidgetRegion, $wgAmazonWidgetWidth, $wgAmazonWidgetHeight;
+        global $wgAmazonWidgetBackground, $wgAmazonWidgetBorder, $wgAmazonWidgetPriceColor;
+        global $wgAmazonWidgetTitleColor, $wgAmazonWidgetNewWindow, $wgAmazonWidgetMarketplace;
+
+        $parser = MediaWikiServices::getInstance()->getParserFactory()->create();
+        $parser->setHook('amazon', 'Multidimensional\AmazonWidget\AmazonWidget::render');
+
+        $parserOutput = $parser->parse(
+            "<amazon asin='" . $asin . "' id='" . $id . "' style='" . $style . "' width='" . $width . "' height='" . $height . "' />",
+            Title::newFromText('Test'),
+            $this->getParserOptions()
+        );
+        
+        $this->assertContains('<iframe style="' . $style . 'width:' . $wgAmazonWidgetWidth . ';height:' . $wgAmazonWidgetHeight . ';" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&amp;OneJS=1&amp;Operation=GetAdHtml&amp;MarketPlace=' . $wgAmazonWidgetRegion . '&amp;source=ac&amp;ref=tf_til&amp;ad_type=product_link&amp;tracking_id=' . $wgAmazonWidgetTag . '&amp;marketplace=' . $wgAmazonWidgetMarketplace . '&amp;region=' . $wgAmazonWidgetRegion . '&amp;placement=B00005N5PF&amp;asins=B00005N5PF&amp;id=123&amp;show_border=' . ($wgAmazonWidgetBorder ? 'true' : 'false') . '&amp;link_opens_in_new_window=' . ($wgAmazonWidgetNewWindow ? 'true' : 'false') . '&amp;price_color=' . $wgAmazonWidgetPriceColor . '&amp;title_color=' . $wgAmazonWidgetTitleColor . '&amp;bg_color=' . $wgAmazonWidgetBackground . '"></iframe>', $parserOutput->getText(['unwrap' => true]));
+        $parser->mPreprocessor = null; # Break the Parser <-> Preprocessor cycle
+    }
+
+    private function getParserOptions()
+    {
+        return ParserOptions::newFromUserAndLang(new User, MediaWikiServices::getInstance()->getContentLanguage());
+    }
+
+    public function testRenders()
+    {
+        $this->RenderFixture('B00005N5PF', '123');
+        $this->RenderFixture('B00005N5PF', '123', 'float:right;');
+        global $wgAmazonWidgetWidth, $wgAmazonWidgetHeight;
+        $wgAmazonWidgetWidth = 100;
+        $wgAmazonWidgetHeight = 150;
+        $this->RenderFixture('B00005N5PF', '123', 'float:right;', 100, 150);
+    }
 }
