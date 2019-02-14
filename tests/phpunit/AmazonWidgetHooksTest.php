@@ -19,31 +19,16 @@
  *    @license    http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Multidimensional\AmazonWidget;
-
-use Parser;
-
-class AmazonWidgetHooks
+class AmazonWidgetHooksTest extends MediaWikiTestCase
 {
 
-    /**
-     * @param Parser $parser
-     * @return bool
-     */
-    public static function onParserFirstCallInit(Parser &$parser)
+    protected function setUp()
     {
-        $parser->setHook('amazon', 'Multidimensional\AmazonWidget\AmazonWidget::render');
-        return true;
+        parent::setUp();
     }
 
-    /**
-     * @param $paths
-     * @return bool
-     */
-    public static function onUnitTestsList(&$paths)
+    protected function tearDown()
     {
-        $paths[] = __DIR__ . '/tests/phpunit/';
-        return true;
+        parent::tearDown();
     }
-
 }

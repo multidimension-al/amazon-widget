@@ -22,7 +22,8 @@
         "Multidimensional\\AmazonWidget\\AmazonWidgetHooks": "AmazonWidgetHooks.php"
     },
     "Hooks": {
-        "ParserFirstCallInit": "Multidimensional\\AmazonWidget\\AmazonWidgetHooks::onParserFirstCallInit"
+        "ParserFirstCallInit": "Multidimensional\\AmazonWidget\\AmazonWidgetHooks::onParserFirstCallInit",
+        "UnitTestsList": "Multidimensional\\AmazonWidget\\AmazonWidgetHooks::onUnitTestsList"
     },
     "manifest_version": 1
 }

@@ -79,6 +79,7 @@ $wgAmazonWidgetBorder = true;
 $wgAmazonWidgetBackground = 'ffffff';
 $wgAmazonWidgetTitleColor = '0066c0';
 $wgAmazonWidgetPriceColor = '333333';
+$wgAmazonWidgetMarketplace = 'amazon';
 ```
 
 ## License
