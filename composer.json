@@ -2,7 +2,7 @@
     "name": "multidimensional/amazon-widget",
     "type": "mediawiki-extension",
     "description": "A MediaWiki Extension for adding Amazon Associate Widgets to your Wiki.",
-    "version": "0.0.2-dev",
+    "version": "0.0.2",
     "homepage": "https://github.com/multidimension-al/amazon-widget",
     "license": "MIT",
     "authors": [{
