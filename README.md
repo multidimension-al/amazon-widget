@@ -64,6 +64,18 @@ Example:
 
 Additional configuration options can be hardcoded in your ```LocalSettings.php``` file.
 
+### Amazon Links
+
+You can also use this Extension to generate links to Amazon products by including text to include in the link by using the following style of tag:
+
+````$xslt
+<amazon asin="B07N7RXQF6"
+            id="5d90afe84e9cd34fb5a0f1fac6b9bf8d">
+            Link Text</amazon>
+````
+
+Note that advanced settings cannot be used with these tags.
+
 ## Advanced Configuration
 
 Hard coded settings can also be added in your ```LocalSettings.php``` file. These will affect appearances across all Widgets, but note that your cache will need to be cleared for all changes to take effect.
