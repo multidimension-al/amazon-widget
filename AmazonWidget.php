@@ -122,7 +122,7 @@ class AmazonWidget {
             $wgAmazonWidgetPriceColor = '333333';
         }
 
-        if (!empty($wgAmazonWidgetAsin) && preg_match('/([A-Z0-9]{10})/is', $wgAmazonWidgetAsin) && !empty($wgAmazonWidgetId)) {
+        if (!empty($wgAmazonWidgetAsin) && preg_match('/([A-Z0-9]{10})/is', $wgAmazonWidgetAsin) && !empty($wgAmazonWidgetId) && empty($input)) {
 
             $widget = '<iframe style="' . $wgAmazonWidgetStyle . '" ';
             $widget .= 'marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="';
@@ -146,11 +146,30 @@ class AmazonWidget {
             $widget .= '&title_color=' . $wgAmazonWidgetTitleColor;
             $widget .= '&bg_color=' . $wgAmazonWidgetBackground;
             $widget .= '"></iframe>';
+            return array($widget, "markerType" => 'nowiki');
+
+        } else if (!empty($wgAmazonWidgetAsin) && preg_match('/([A-Z0-9]{10})/is', $wgAmazonWidgetAsin) && !empty($wgAmazonWidgetId) && !empty($input)) {
+
+            $widget = '[https://www.amazon.com/gp/product/' . $wgAmazonWidgetAsin;
+            $widget .= '/ref=as_li_tl?ie=UTF8&creativeASIN=' . $wgAmazonWidgetAsin;
+            $widget .= '&linkCode=as2&tag=' . $wgAmazonWidgetTag;
+            $widget .= '&linkId=' . $wgAmazonWidgetId;
+            $widget .= ' ' . $input . ']';
+            return $parser->recursiveTagParse($widget, $frame);
 
         } else {
-            $widget = '';
+            $widget = '<amazon';
+            foreach ($ARGS as $name => $value) {
+                $widget .= ' ' . $name . '="' . $value . '"';
+            }
+            if (!empty($input)) {
+                $widget .= '>' . $input . '</amazon>';
+            } else {
+                $widget .= '/>';
+            }
+            return $widget;
         }
 
-        return array($widget, "markerType" => 'nowiki');
+
     }
 }

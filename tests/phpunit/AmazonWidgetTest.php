@@ -48,7 +48,7 @@ class AmazonWidgetTest extends MediaWikiTestCase
         parent::tearDown();
     }
 
-    public function renderTag($asin, $id, $style = '', $width = 120, $height = 240)
+    public function renderTag($input = '', $asin, $id, $style = '', $width = 120, $height = 240)
     {
         global $wgAmazonWidgetTag, $wgAmazonWidgetRegion, $wgAmazonWidgetWidth, $wgAmazonWidgetHeight;
         global $wgAmazonWidgetBackground, $wgAmazonWidgetBorder, $wgAmazonWidgetPriceColor;
@@ -58,12 +58,16 @@ class AmazonWidgetTest extends MediaWikiTestCase
         $parser->setHook('amazon', 'Multidimensional\AmazonWidget\AmazonWidget::render');
 
         $parserOutput = $parser->parse(
-            "<amazon asin='" . $asin . "' id='" . $id . "' style='" . $style . "' width='" . $width . "' height='" . $height . "' />",
+            "<amazon asin='" . $asin . "' id='" . $id . "' style='" . $style . "' width='" . $width . "' height='" . $height . "'>" . $input . "</amazon>",
             Title::newFromText('Test'),
             $this->getParserOptions()
         );
 
-        $this->assertContains('<iframe style="' . $style . 'width:' . $wgAmazonWidgetWidth . ';height:' . $wgAmazonWidgetHeight . ';" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&amp;OneJS=1&amp;Operation=GetAdHtml&amp;MarketPlace=' . $wgAmazonWidgetRegion . '&amp;source=ac&amp;ref=tf_til&amp;ad_type=product_link&amp;tracking_id=' . $wgAmazonWidgetTag . '&amp;marketplace=' . $wgAmazonWidgetMarketplace . '&amp;region=' . $wgAmazonWidgetRegion . '&amp;placement=B00005N5PF&amp;asins=B00005N5PF&amp;id=123&amp;show_border=' . ($wgAmazonWidgetBorder ? 'true' : 'false') . '&amp;link_opens_in_new_window=' . ($wgAmazonWidgetNewWindow ? 'true' : 'false') . '&amp;price_color=' . $wgAmazonWidgetPriceColor . '&amp;title_color=' . $wgAmazonWidgetTitleColor . '&amp;bg_color=' . $wgAmazonWidgetBackground . '"></iframe>', $parserOutput->getText(['unwrap' => true]));
+        if (empty($input)) {
+            $this->assertContains('<iframe style="' . $style . 'width:' . $wgAmazonWidgetWidth . ';height:' . $wgAmazonWidgetHeight . ';" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&amp;OneJS=1&amp;Operation=GetAdHtml&amp;MarketPlace=' . $wgAmazonWidgetRegion . '&amp;source=ac&amp;ref=tf_til&amp;ad_type=product_link&amp;tracking_id=' . $wgAmazonWidgetTag . '&amp;marketplace=' . $wgAmazonWidgetMarketplace . '&amp;region=' . $wgAmazonWidgetRegion . '&amp;placement=' . $asin . '&amp;asins=' . $asin . '&amp;id=' . $id . '&amp;show_border=' . ($wgAmazonWidgetBorder ? 'true' : 'false') . '&amp;link_opens_in_new_window=' . ($wgAmazonWidgetNewWindow ? 'true' : 'false') . '&amp;price_color=' . $wgAmazonWidgetPriceColor . '&amp;title_color=' . $wgAmazonWidgetTitleColor . '&amp;bg_color=' . $wgAmazonWidgetBackground . '"></iframe>', $parserOutput->getText(['unwrap' => true]));
+        } else {
+            $this->assertContains('href="https://www.amazon.com/gp/product/' . $asin . '/ref=as_li_tl?ie=UTF8&amp;creativeASIN=' . $asin . '&amp;linkCode=as2&amp;tag=' . $wgAmazonWidgetTag . '&amp;linkId=' . $id . '"', $parserOutput->getText(['unwrap' => true]));
+        }
         $parser->mPreprocessor = null; # Break the Parser <-> Preprocessor cycle
     }
 
@@ -74,11 +78,12 @@ class AmazonWidgetTest extends MediaWikiTestCase
 
     public function testRenders()
     {
-        $this->renderTag('B00005N5PF', '123');
-        $this->renderTag('B00005N5PF', '123', 'float:right;');
+        $this->renderTag('', 'B00005N5PF', '123');
+        $this->renderTag('Product', 'B00005N5PF', '123');
+        $this->renderTag('', 'B00005N5PF', '123', 'float:right;');
         global $wgAmazonWidgetWidth, $wgAmazonWidgetHeight;
         $wgAmazonWidgetWidth = 100;
         $wgAmazonWidgetHeight = 150;
-        $this->renderTag('B00005N5PF', '123', 'float:right;', 100, 150);
+        $this->renderTag('', 'B00005N5PF', '123', 'float:right;', 100, 150);
     }
 }
