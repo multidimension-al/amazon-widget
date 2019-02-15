@@ -70,8 +70,8 @@ You can also use this Extension to generate links to Amazon products by includin
 
 ````$xslt
 <amazon asin="B07N7RXQF6"
-            id="5d90afe84e9cd34fb5a0f1fac6b9bf8d">
-            Link Text</amazon>
+    id="5d90afe84e9cd34fb5a0f1fac6b9bf8d">
+    Link Text</amazon>
 ````
 
 Note that advanced settings cannot be used with these tags.
