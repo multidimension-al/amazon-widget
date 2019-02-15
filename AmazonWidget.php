@@ -167,7 +167,7 @@ class AmazonWidget {
             } else {
                 $widget .= '/>';
             }
-            return htmlspecialchars($widget);
+            return array(htmlspecialchars($widget), "markerType" => 'nowiki');
         }
 
 
