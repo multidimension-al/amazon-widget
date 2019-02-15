@@ -167,7 +167,7 @@ class AmazonWidget {
             } else {
                 $widget .= '/>';
             }
-            return $widget;
+            return htmlspecialchars($widget);
         }
 
 
